@@ -1,0 +1,52 @@
+;;; -*- coding: utf-8 -*-
+
+;; ----- ido-last-directory-list -----
+(
+ ("c:/Users/Kirin/AppData/" . "Roaming/")
+ ("c:/Users/Kirin/" . "AppData/")
+ ("c:/Users/" . "Kirin/")
+ ("c:/" . "Users/")
+ ("c:/Users/Kirin/Desktop/just-another-backend/src/arch/" . "x86_64/")
+ ("c:/Users/Kirin/Desktop/just-another-backend/src/" . "arch/")
+ ("c:/Users/Kirin/Desktop/just-another-backend/" . "src/")
+)
+
+;; ----- ido-work-directory-list -----
+(
+ "c:/Users/Kirin/AppData/Roaming/"
+ "c:/Users/Kirin/Desktop/just-another-backend/src/arch/x86_64/"
+ "c:/Users/Kirin/Desktop/just-another-backend/"
+)
+
+;; ----- ido-work-file-list -----
+(
+ ".emacs"
+ "encode.cpp"
+ "s"
+)
+
+;; ----- ido-dir-file-cache -----
+(
+ ("c:/Users/Kirin/AppData/Roaming/" (25289 58768 0 0) "Zoom/" "Wireshark/" "WakaTime/" "vstelemetry/" "Visual Studio Setup/" "Visual Studio Code/" "Vampire_Survivors/" "Valve Corporation/" "TroveTools.NET/" "Trove/" "testing/" "TeamViewer/" "Teams/" "Sun/" "Sublime Text 3/" "StardewValley/" "Skype/" "README.md" "raisehand/" "Python/" "pyinstaller/" "Pub/" "ProtonVPN AG/" "Path of Exile/" "paradox-launcher-v2/" "Paradox Interactive/" "osdmnuu_dir/" "NuGet/" "npm-cache/" "npm/" "Notepad++/" "nltk_data/" "NexonLauncher/" "MySQL/" "Mozilla/" "Microsoft Visual Studio/" "Microsoft FxCop/" "Microsoft/" "Macromedia/" "Logitech/" "Logishrd/" "llvmenv/" "LICENSE" "JWrapper-JWrapperApp/" "JetBrains/" "Jedi/" "InstallShield Installation Information/" "HelloGames/" "Heat_Signature/" "Haste/" "Google/" "godot/" "GitHub Desktop/" "gcloud/" "Factorio/" "electron-test/" "EasyAntiCheat/" "Easeware/" "Docker Desktop/" "Docker/" "discord/" "Code - Insiders/" "Code/" "Bungie/" "bluej.Boot$App/" "Battle.net/" "Baba_Is_You/" "Atom/" "ATNSOFT/" "AdobeWLCMCache.dat" "Adobe/" "activestate/" "ActivePresenter/" ".technic/" ".stagehand" ".mono/" ".minecraft/" ".gitmodules" ".git/" ".flutter_tool_state" ".flutter" ".emacs~" ".emacs.d/" ".emacs" ".dart/" "../" "./")
+
+ ("c:/Users/Kirin/AppData/Local/" (25288 61814 0 0) "__SHARED/" "Zeal/" "WebLaunchRecorder/" "Warframe/" "VSCodeVim/" "VirtualStore/" "videoeditorplus/" "VALORANT/" "UserProducts.xml" "updater.log" "UnrealEngineLauncher/" "UnrealEngine/" "Unity/" "UNDERTALE/" "Ubisoft Game Launcher/" "TurmoilSteam/" "TileDataLayer/" "Thalonet,_Inc._dba_Haste/" "Temporary Internet Files/" "Temp/" "TeamViewer/" "Suite/" "Sublime Text 3/" "Steam/" "SquirrelTemp/" "Speech Graphics/" "Skyrim/" "ServiceHub/" "Screencast-O-Matic-v2/" "Riot Games/" "resmon.resmoncfg" "RadeonSettings/" "RadeonInstaller/" "pypa/" "PVZCache/" "Publishers/" "Programs/" "PlaceholderTileLogoFolder/" "pipenv/" "pip/" "Paradox Interactive/" "PackageStaging/" "Packages/" "Package Cache/" "Overwolf/" "osu!/" "oobelibMkey.log" "OneDrive/" "NVIDIA Corporation/" "NuGet/" "Notepad++/" "node-gyp/" "Mozilla/" "Movavi/" "Microsoft_Corporation/" "MicrosoftEdge/" "Microsoft SDKs/" "Microsoft/" "main.kts.compiled.cache/" "LogMeIn/" "Logitech/" "llvmenv/" "kotlin/" "JetBrains/" "Jedi/" "IsolatedStorage/" "insight-nodejs/" "IdentityNexusIntegration/" "IconCache.db" "History/" "Haste/" "Google/" "GOG.com/" "Glyph/" "GitHubVisualStudio/" "GitHubDesktop/" "GameAnalytics/" "g3/" "FortniteGame/" "Forager/" "FluxSoftware/" "Expo/" "EpicGamesLauncher/" "ElevatedDiagnostics/" "electron/" "Eclipse/" "DunDefLauncher/" "Downloaded Installations/" "Docker/" "Discord/" "Diagnostics/" "DDS/" "DBG/" "D3DSCache/" "CrashReportClient/" "CrashDumps/" "converter/" "ConnectedDevicesPlatform/" "Comms/" "CMakeTools/" "clink/" "clangd/" "CEF/" "cache/" "btdb2_game.dmp" "Blizzard Entertainment/" "Blizzard/" "BattlEye/" "Battle.net/" "AWSToolkit/" "atom/" "Astro/" "Archon/" "Apps/" "Application Data/" "Android/" "AMD_Common/" "AMD/" "AdvinstAnalytics/" "Adobe/" "activestate_persist/" "ActiveState/" ".IdentityService/" ".dartServer/" "../" "./")
+
+ ("c:/Users/Kirin/AppData/" (24743 15308 0 0) "Roaming/" "LocalLow/" "Local/" "../" "./")
+
+ ("c:/Users/" (24743 15196 0 0) "Public/" "Kirin/" "desktop.ini" "Default User/" "Default/" "All Users/" "../" "./")
+
+ ("c:/Users/Kirin/" (25277 12416 0 0) "_viminfo" "_.swp" "_.swo" "VirtualBox VMs/" "Videos/" "Twitch/" "Templates/" "Start Menu/" "source/" "SendTo/" "Searches/" "scikit_learn_data/" "Saved Games/" "rtw-stuff/" "Recent/" "PycharmProjects/" "PrintHood/" "Pictures/" "Perl-5.34.0-Windows/" "OneDrive/" "ntuser.ini" "NTUSER.DAT{44b21cf3-b9f7-11eb-b411-f39f47b7ec42}.TMContainer00000000000000000002.regtrans-ms" "NTUSER.DAT{44b21cf3-b9f7-11eb-b411-f39f47b7ec42}.TMContainer00000000000000000001.regtrans-ms" "NTUSER.DAT{44b21cf3-b9f7-11eb-b411-f39f47b7ec42}.TM.blf" "ntuser.dat.LOG2" "ntuser.dat.LOG1" "NTUSER.DAT" "NetHood/" "My Documents/" "Music/" "MicrosoftEdgeBackups/" "Local Settings/" "Links/" "kirincichb@gmail.com Creative Cloud Files/" "InstallAnywhere/" "IdeaProjects/" "git/" "getting-started/" "Favorites/" "eclipse-workspace/" "eclipse/" "Downloads/" "Documents/" "Desktop/" "curseforge/" "Creative Cloud Files/" "Cookies/" "Contacts/" "b17k100@gmail.com Creative Cloud Files/" "Application Data/" "AppData/" "AndroidStudioProjects/" "3D Objects/" "20kirincichb@wiltonps.org Creative Cloud Files/" ".wakatime.log" ".wakatime.db" ".wakatime.cfg" ".wakatime.bdb" ".wakatime-internal.cfg" ".wakatime/" ".vscode-insiders/" ".vscode/" ".VirtualBox/" ".viminfo" ".tooling/" ".ssh/" ".rustup/" ".QtWebEngineProcess/" ".platformio/" ".p2/" ".Origin/" ".matplotlib/" ".m2/" ".jmc/" ".ipython/" ".idlerc/" ".gradle/" ".gitconfig" ".expo/" ".eclipse/" ".docker/" ".config/" ".cargo/" ".cache/" ".boto" ".bash_history" ".azure/" ".aws/" ".atom/" ".AndroidStudio3.6/" ".android/" "../" "./")
+
+ ("c:/Users/Kirin/Desktop/just-another-backend/src/arch/x86_64/" (25288 49760 0 0) "mdir_gen.cpp" "mdir.cpp" "encode.cpp" "../" "./")
+
+ ("c:/Users/Kirin/Desktop/just-another-backend/src/arch/" (25210 42984 0 0) "x86_64/" "wasm/" "aarch64/" "../" "./")
+
+ ("c:/Users/Kirin/Desktop/" (25286 17466 0 0) "Wordplay.zip" "Wordplay-Spanish-Cheat-cmd-master/" "Wordplay-Hack-Extension/" "WinDirStat.lnk" "vulkan/" "Visual Studio Code.lnk" "Visual Studio Code - Insiders.lnk" "Vampire Survivors.url" "triangle-in-vulkan/" "TinyLua/" "text classification/" "testing/" "test.txt" "test.java" "test.class" "Super Auto Pets.url" "string_pool/" "Stellaris.url" "Steam.lnk" "src.zip" "songs/" "some_notes.txt~" "some_notes.txt" "Software/" "SIP/" "sha256-384-512/" "serenity.txt" "serenity/" "Riot Client.lnk" "Project2/" "Project1/" "Paradox Launcher v2.lnk" "OpenGL_Test/" "modded_terraria/" "MinesweeperAI/" "MCMods/" "lua-test/" "LiveJavaBytecode.ps1" "klscript/" "just-another-backend/" "javafx-sdk-11.0.2/" "IntelliJ IDEA Community Edition 2020.3.lnk" "http-server/" "Help - Copy/" "Help/" "Hades.url" "Graduation/" "games.txt~" "games.txt" "Games/" "game-engine/" "Fortnite.url" "Extension/" "Electron-test/" "Docker Desktop.lnk" "Discord.lnk" "desktop.ini" "Cuik/" "CSPROJ/" "Chess javafx/" "chess/" "Castle Crashers.url" "bot.txt" "Bot/" "books/" "ARCVM-V2/" "ARCVM-V1/" "ARCVM/" "arcane-syntax-highlighter/" "ARCANE/" "a.txt" "../" "./")
+
+ ("c:/Users/Kirin/Desktop/just-another-backend/src/" (25289 6770 0 0) "register_manager.cpp" "register_allocator.cpp" "passes/" "module_builder.cpp" "misc/" "main.cpp" "link/" "jit_env.cpp" "jab.cpp" "context.cpp" "arch/" "#main.cpp#" "../" "./")
+
+ ("c:/Users/Kirin/Desktop/just-another-backend/" (25289 50292 0 0) "tests/" "test.obj" "test.o" "test.c" "temp_files/" "src/" "README.md" "LICENSE" "lib/" "IRDesign.md" "include/" "docs/" "CMakeLists.txt" "build/" "bin/" ".vscode/" ".gitignore" ".git/" "../" "./")
+)
+
+;; ----- ido-unc-hosts-cache -----
+t

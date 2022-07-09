@@ -24,78 +24,52 @@
  '(c-tab-always-indent nil)
  '(column-number-mode t)
  '(cua-mode t)
- '(custom-enabled-themes '(tango-dark))
+ '(custom-enabled-themes '(gruber-darker tango-dark))
+ '(custom-safe-themes
+   '("c4cecd97a6b30d129971302fd8298c2ff56189db0a94570e7238bc95f9389cfb" "3d2e532b010eeb2f5e09c79f0b3a277bfc268ca91a59cdda7ffd056b868a03bc" default))
  '(display-line-numbers-type 'relative)
+ '(explicit-shell-file-name "C:/Windows/System32/WindowsPowerShell/v1.0/powershell.exe")
  '(global-display-line-numbers-mode t)
  '(inhibit-startup-screen t)
  '(menu-bar-mode nil)
  '(package-selected-packages
-   '(nhexl-mode multiple-cursors hl-todo vundo counsel swiper ample-theme zenburn-theme rust-mode projectile))
+   '(move-text gruber-darker-theme ido-completing-read+ zeal-at-point nhexl-mode multiple-cursors hl-todo vundo counsel swiper ample-theme zenburn-theme))
  '(ring-bell-function 'ignore)
  '(save-place-mode t)
+ '(shell-file-name "C:/Windows/System32/WindowsPowerShell/v1.0/powershell.exe")
  '(size-indication-mode t)
- '(speedbar-verbosity-level 0)
  '(tab-width 4)
  '(tool-bar-mode nil)
- '(visible-bell t))
+ '(visible-bell t)
+ '(default ((t (:family "Courier New" :foundry "outline" :slant normal :weight normal :height 120 :width normal)))))
 
-;; other packages to use later
-;;     flycheck avy helm-xref lsp-mode yasnippet lsp-treemacs helm-lsp company
-;; probably won't use these
-;;     hydra which-key cmake-project
+
 
 (when (cl-find-if-not #'package-installed-p package-selected-packages)
   (package-refresh-contents)
   (mapc #'package-install package-selected-packages))
-
-;; sample `helm' configuration use https://github.com/emacs-helm/helm/ for details
-;;(helm-mode)
-;;(require 'helm-xref)
-;;(define-key global-map [remap find-file] #'helm-find-files)
-;;(define-key global-map [remap execute-extended-command] #'helm-M-x)
-;;(define-key global-map [remap switch-to-buffer] #'helm-mini)
-
-;;(which-key-mode)
-;;(add-hook 'c-mode-hook 'lsp)
-;;(add-hook 'c++-mode-hook 'lsp)
-
-
-;;(setq gc-cons-threshold (* 100 1024 1024)
-;;      read-process-output-max (* 1024 1024)
-;;      treemacs-space-between-root-nodes nil
-;;      company-idle-delay 0.0
-;;      company-minimum-prefix-length 1
-;;      lsp-idle-delay 0.1)  ;; clangd is fast
-
-;;(with-eval-after-load 'lsp-mode
-;;  (add-hook 'lsp-mode-hook #'lsp-enable-which-key-integration)
-;;  (yas-global-mode))
 
 ;; hl-todo stuff
 (setq hl-todo-keyword-faces
 	  '(("TODO"   . "#CC5555")
 		("FIXME"  . "#55CC55")
 		("NOTE"   . "#55CCCC")))
-
 (global-hl-todo-mode)
 
 
 ;; load themes here
 ;(load-theme 'zenburn t)
-(load-theme 'ample-flat t)
+;(load-theme 'ample-flat t)
+(load-theme 'gruber-darker t)
 
 ;; enable default theme
-(enable-theme 'ample-flat)
-
-;; fonts
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(default ((t (:family "Courier New" :foundry "outline" :slant normal :weight normal :height 120 :width normal)))))
+;(enable-theme 'zenburn)
+;(enable-theme 'ample-flat)
+(enable-theme 'gruber-darker)
 
 ;; misc. stuff
+(setq show-paren-delay 0)
+(setq use-dialog-box nil)
 (setq display-line-numbers-type 'relative)
 (global-display-line-numbers-mode)
 (column-number-mode)
@@ -120,12 +94,19 @@
 (global-unset-key (kbd "C-S-z"))
 (global-set-key (kbd "C-S-z") 'vundo)
 
+;; bind shell-command
+(global-unset-key (kbd "C-`"))
+(global-set-key (kbd "C-`") 'shell-command)
 
+;; ido stuff
+(ido-mode t)
+(ido-everywhere t)
+(ido-ubiquitous-mode t)
+(fido-mode t)
 
 ;; change isearch keybinds to up and down
 (define-key isearch-mode-map [up] 'isearch-repeat-backward)
 (define-key isearch-mode-map [down] 'isearch-repeat-forward)
-
 
 ;; rebind delete word/line
 (global-unset-key (kbd "C-d"))	
@@ -133,42 +114,14 @@
 (global-unset-key (kbd "C-S-d"))
 (global-set-key (kbd "C-S-d") 'kill-whole-line)
 
+(global-set-key (kbd "C-S-c C-S-c") 'mc/edit-lines)
+(global-set-key (kbd "C->")         'mc/mark-next-like-this)
+(global-set-key (kbd "C-<")         'mc/mark-previous-like-this)
+(global-set-key (kbd "C-c C-<")     'mc/mark-all-like-this)
+(global-set-key (kbd "C-\"")        'mc/skip-to-next-like-this)
+(global-set-key (kbd "C-:")         'mc/skip-to-previous-like-this)
+
 ;; move text up/down with alt
-(defun move-text-internal (arg)
-  (cond
-   ((and mark-active transient-mark-mode)
-	(if (> (point) (mark))
-        (exchange-point-and-mark))
-    (let ((column (current-column))
-          (text (delete-and-extract-region (point) (mark))))
-      (forward-line arg)
-      (move-to-column column t)
-      (set-mark (point))
-      (insert text)
-      (exchange-point-and-mark)
-      (setq deactivate-mark nil)))
-   (t
-    (let ((column (current-column)))
-      (beginning-of-line)
-      (when (or (> arg 0) (not (bobp)))
-        (forward-line)
-        (when (or (< arg 0) (not (eobp)))
-          (transpose-lines arg))
-        (forward-line -1))
-      (move-to-column column t)))))
-
-(defun move-text-down (arg)
-  "Move region (transient-mark-mode active) or current line
-  arg lines down."
-  (interactive "*p")
-  (move-text-internal arg))
-
-(defun move-text-up (arg)
-  "Move region (transient-mark-mode active) or current line
-  arg lines up."
-  (interactive "*p")
-  (move-text-internal (- arg)))
-
 (global-set-key [M-up] 'move-text-up)
 (global-set-key [M-down] 'move-text-down)
 
@@ -253,3 +206,4 @@
 	nil))))
 
 (global-set-key (kbd "C-S-<tab>") 'other-window-inverse)
+
