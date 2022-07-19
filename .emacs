@@ -1,8 +1,11 @@
 (require 'package)
+(add-to-list 'package-archives '("elpa" . "https://elpa.gnu.org/packages/") t)
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
+(add-to-list 'package-archives '("org" . "https://orgmode.org/elpa/") t)
 ;;(add-to-list 'package-archives '("melpa-stable" . "https://stable.melpa.org/packages/") t)
 (package-initialize)
 
+;; need to wait until clang supports C++20/23 better
 ;;(add-hook 'c-mode-hook 'lsp)
 ;;(add-hook 'c++-mode-hook 'lsp)
 
@@ -24,26 +27,23 @@
  '(c-tab-always-indent nil)
  '(column-number-mode t)
  '(cua-mode t)
- '(custom-enabled-themes '(gruber-darker tango-dark))
+ '(custom-enabled-themes '(tango-dark))
  '(custom-safe-themes
    '("c4cecd97a6b30d129971302fd8298c2ff56189db0a94570e7238bc95f9389cfb" "3d2e532b010eeb2f5e09c79f0b3a277bfc268ca91a59cdda7ffd056b868a03bc" default))
- '(display-line-numbers-type 'relative)
  '(explicit-shell-file-name "C:/Windows/System32/WindowsPowerShell/v1.0/powershell.exe")
- '(global-display-line-numbers-mode t)
  '(inhibit-startup-screen t)
  '(menu-bar-mode nil)
  '(package-selected-packages
-   '(move-text gruber-darker-theme ido-completing-read+ zeal-at-point nhexl-mode multiple-cursors hl-todo vundo counsel swiper ample-theme zenburn-theme))
+   '(neotree dashboard spacemacs-theme org-bullets magit-todos magit vertico naysayer-theme move-text gruber-darker-theme ido-completing-read+ zeal-at-point nhexl-mode hl-todo vundo counsel swiper ample-theme zenburn-theme))
  '(ring-bell-function 'ignore)
  '(save-place-mode t)
  '(shell-file-name "C:/Windows/System32/WindowsPowerShell/v1.0/powershell.exe")
  '(size-indication-mode t)
  '(tab-width 4)
  '(tool-bar-mode nil)
- '(visible-bell t)
- '(default ((t (:family "Courier New" :foundry "outline" :slant normal :weight normal :height 120 :width normal)))))
+ '(visible-bell nil))
 
-
+(set-face-attribute 'default nil :font "Courier New" :height 120)
 
 (when (cl-find-if-not #'package-installed-p package-selected-packages)
   (package-refresh-contents)
@@ -60,21 +60,27 @@
 ;; load themes here
 ;(load-theme 'zenburn t)
 ;(load-theme 'ample-flat t)
-(load-theme 'gruber-darker t)
+;(load-theme 'gruber-darker t)
+(load-theme 'naysayer t)
+;(load-theme 'spacemacs-dark t)
 
 ;; enable default theme
 ;(enable-theme 'zenburn)
 ;(enable-theme 'ample-flat)
-(enable-theme 'gruber-darker)
+;(enable-theme 'gruber-darker)
+(enable-theme 'naysayer)
+;(enable-theme 'spacemacs-dark)
 
 ;; misc. stuff
+(set-cursor-color "#8CFAD6")
 (setq show-paren-delay 0)
 (setq use-dialog-box nil)
-(setq display-line-numbers-type 'relative)
-(global-display-line-numbers-mode)
 (column-number-mode)
 (size-indication-mode)
 (toggle-scroll-bar nil)
+;; causes flickering
+;;(setq display-line-numbers-type 'relative)
+;;(global-display-line-numbers-mode)
 
 ;; enable these
 (put 'upcase-region 'disabled nil)
@@ -102,7 +108,11 @@
 (ido-mode t)
 (ido-everywhere t)
 (ido-ubiquitous-mode t)
-(fido-mode t)
+;;(fido-mode t)
+
+;; vertico stuff
+;;(vertico-mode t)
+;;(vertico-flat-mode t)
 
 ;; change isearch keybinds to up and down
 (define-key isearch-mode-map [up] 'isearch-repeat-backward)
@@ -125,30 +135,25 @@
 (global-set-key [M-up] 'move-text-up)
 (global-set-key [M-down] 'move-text-down)
 
-;; dired sidebar stuff
-(require 'dired-sidebar)
-
-;(setq dired-sidebar-theme 'ascii)
-(setq dired-sidebar-theme 'nerd)
-
-(setq dired-sidebar-subtree-line-prefix "-")
-(setq dired-sidebar-use-term-integration t)
-(setq dired-sidebar-use-custom-font t)
-(setq dired-sidebar-width 25)
-
-(dired-sidebar-show-sidebar)
-
+;; neotree
 (global-unset-key (kbd "C-b"))
-(global-set-key (kbd "C-b") 'dired-sidebar-toggle-sidebar)
+(global-set-key (kbd "C-b") 'neotree-toggle)
 
 ;; window switching stuff
 (global-unset-key (kbd "C-x o"))
 (global-set-key (kbd "C-<tab>") 'other-window)
 
+;; dashboard
+(use-package dashboard
+  :ensure t
+  :config
+  (dashboard-setup-startup-hook))
+
+(setq initial-buffer-choice (lambda () (get-buffer-create "*dashboard*")))
 
 ;; this can probably be reduced down
 ;; for now this is taken from window.el and modified a bit
-(defun other-window-inverse (count &optional all-frames interactive)
+(defun bk/other-window-inverse (count &optional all-frames interactive)
   "Same functionality of other-window but in reverse."
   (interactive "p\ni\np")
   (setq count (- count))
@@ -205,5 +210,41 @@
 	;; Always return nil.
 	nil))))
 
-(global-set-key (kbd "C-S-<tab>") 'other-window-inverse)
+(global-set-key (kbd "C-S-<tab>") 'bk/other-window-inverse)
 
+
+;; org mode stuff
+(defun bk/org-mode-setup ()
+  (org-indent-mode)
+  (auto-fill-mode 0)
+  (visual-line-mode 1))
+
+(use-package org
+  :hook (org-mode . bk/org-mode-setup)
+  :config
+  (setq org-hide-emphasis-markers t))
+
+(require 'org-faces)
+(dolist (face '((org-level-1 . 1.75)
+				(org-level-2 . 1.5)
+				(org-level-3 . 1.25)
+				(org-level-4 . 1.1)
+				(org-level-5 . 1.0)
+				(org-level-6 . 1.0)
+				(org-level-7 . 1.0)
+				(org-level-8 . 1.0)))
+  (set-face-attribute (car face) nil :font "Times New Roman" :weight 'bold :height (cdr face)))
+
+(require 'org-superstar)
+(add-hook 'org-mode-hook (lambda () (org-superstar-mode 1)))
+(setq org-superstar-headline-bullets-list '("◉" "○" "●" "○" "●" "○" "●"))
+(setq org-hide-leading-stars nil)
+(setq org-superstar-leading-bullet ?\s)
+(setq org-indent-mode-turns-on-hiding-stars nil)
+
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
