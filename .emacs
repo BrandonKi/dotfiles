@@ -9,9 +9,16 @@
 ;;(add-hook 'c-mode-hook 'lsp)
 ;;(add-hook 'c++-mode-hook 'lsp)
 
-(add-to-list 'load-path "~/.emacs.d/custom/")
-(add-to-list 'load-path "~/.emacs.d/custom/dired-hacks")
+;;(add-to-list 'load-path "~/.emacs.d/custom/")
 
+;; Themes
+;; * naysayer
+;; * ample
+;; * gruber-dark
+;; * spacemacs
+;; * zenburn
+;; * 
+;; * 
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -29,12 +36,12 @@
  '(cua-mode t)
  '(custom-enabled-themes '(tango-dark))
  '(custom-safe-themes
-   '("c4cecd97a6b30d129971302fd8298c2ff56189db0a94570e7238bc95f9389cfb" "3d2e532b010eeb2f5e09c79f0b3a277bfc268ca91a59cdda7ffd056b868a03bc" default))
+   '("bffa9739ce0752a37d9b1eee78fc00ba159748f50dc328af4be661484848e476" "c4cecd97a6b30d129971302fd8298c2ff56189db0a94570e7238bc95f9389cfb" "3d2e532b010eeb2f5e09c79f0b3a277bfc268ca91a59cdda7ffd056b868a03bc" default))
  '(explicit-shell-file-name "C:/Windows/System32/WindowsPowerShell/v1.0/powershell.exe")
  '(inhibit-startup-screen t)
  '(menu-bar-mode nil)
  '(package-selected-packages
-   '(neotree dashboard spacemacs-theme org-bullets magit-todos magit vertico naysayer-theme move-text gruber-darker-theme ido-completing-read+ zeal-at-point nhexl-mode hl-todo vundo counsel swiper ample-theme zenburn-theme))
+   '(jetbrains-darcula-theme darcula-theme gruvbox-theme neotree org-bullets magit-todos magit vertico naysayer-theme move-text gruber-darker-theme ido-completing-read+ nhexl-mode hl-todo vundo counsel swiper ample-theme zenburn-theme))
  '(ring-bell-function 'ignore)
  '(save-place-mode t)
  '(shell-file-name "C:/Windows/System32/WindowsPowerShell/v1.0/powershell.exe")
@@ -105,14 +112,14 @@
 (global-set-key (kbd "C-`") 'shell-command)
 
 ;; ido stuff
-(ido-mode t)
-(ido-everywhere t)
-(ido-ubiquitous-mode t)
+;;(ido-mode t)
+;;(ido-everywhere t)
+;;(ido-ubiquitous-mode t)
 ;;(fido-mode t)
 
 ;; vertico stuff
-;;(vertico-mode t)
-;;(vertico-flat-mode t)
+(vertico-mode t)
+(vertico-flat-mode t)
 
 ;; change isearch keybinds to up and down
 (define-key isearch-mode-map [up] 'isearch-repeat-backward)
@@ -139,17 +146,11 @@
 (global-unset-key (kbd "C-b"))
 (global-set-key (kbd "C-b") 'neotree-toggle)
 
+;;(setq neo-theme (if (display-graphic-p) 'icons 'arrow))
+
 ;; window switching stuff
 (global-unset-key (kbd "C-x o"))
 (global-set-key (kbd "C-<tab>") 'other-window)
-
-;; dashboard
-(use-package dashboard
-  :ensure t
-  :config
-  (dashboard-setup-startup-hook))
-
-(setq initial-buffer-choice (lambda () (get-buffer-create "*dashboard*")))
 
 ;; this can probably be reduced down
 ;; for now this is taken from window.el and modified a bit
@@ -248,3 +249,51 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
+
+(defun indent-region-custom(numSpaces)
+    (progn 
+        ; default to start and end of current line
+        (setq regionStart (line-beginning-position))
+        (setq regionEnd (line-end-position))
+        
+        ; if there's a selection, use that instead of the current line
+        (when (use-region-p)
+            (setq regionStart (region-beginning))
+            (setq regionEnd (region-end))
+        )
+        
+        (save-excursion ; restore the position afterwards            
+            (goto-char regionStart) ; go to the start of region
+            (setq start (line-beginning-position)) ; save the start of the line
+            (goto-char regionEnd) ; go to the end of region
+            (setq end (line-end-position)) ; save the end of the line
+            
+            (indent-rigidly start end numSpaces) ; indent between start and end
+            (setq deactivate-mark nil) ; restore the selected region
+        )
+    )
+)
+
+(defun untab-region (N)
+    (interactive "p")
+    (indent-region-custom -4)
+)
+
+(defun tab-region (N)
+    (interactive "p")
+    (if (active-minibuffer-window)
+        (minibuffer-complete)    ; tab is pressed in minibuffer window -> do completion
+    ; else
+    (if (string= (buffer-name) "*shell*")
+        (comint-dynamic-complete) ; in a shell, use tab completion
+    ; else
+    (if (use-region-p)    ; tab is pressed is any other buffer -> execute with space insertion
+        (indent-region-custom 4) ; region was selected, call indent-region-custom
+        (insert "    ") ; else insert four spaces as expected
+    )))
+)
+
+;; TODO this messes up magit binds :(
+;; need to fix in the future
+(global-set-key (kbd "<backtab>") 'untab-region)
+(global-set-key (kbd "<tab>") 'tab-region)
