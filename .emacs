@@ -36,12 +36,13 @@
  '(cua-mode t)
  '(custom-enabled-themes '(tango-dark))
  '(custom-safe-themes
-   '("bffa9739ce0752a37d9b1eee78fc00ba159748f50dc328af4be661484848e476" "c4cecd97a6b30d129971302fd8298c2ff56189db0a94570e7238bc95f9389cfb" "3d2e532b010eeb2f5e09c79f0b3a277bfc268ca91a59cdda7ffd056b868a03bc" default))
+   '("5d59bd44c5a875566348fa44ee01c98c1d72369dc531c1c5458b0864841f887c" "735561d82728e28f275802fc875c3a2caf14d06f434604a7516c59d49120b163" "bffa9739ce0752a37d9b1eee78fc00ba159748f50dc328af4be661484848e476" "c4cecd97a6b30d129971302fd8298c2ff56189db0a94570e7238bc95f9389cfb" "3d2e532b010eeb2f5e09c79f0b3a277bfc268ca91a59cdda7ffd056b868a03bc" default))
  '(explicit-shell-file-name "C:/Windows/System32/WindowsPowerShell/v1.0/powershell.exe")
  '(inhibit-startup-screen t)
+ '(lua-indent-level 4)
  '(menu-bar-mode nil)
  '(package-selected-packages
-   '(jetbrains-darcula-theme darcula-theme gruvbox-theme neotree org-bullets magit-todos magit vertico naysayer-theme move-text gruber-darker-theme ido-completing-read+ nhexl-mode hl-todo vundo counsel swiper ample-theme zenburn-theme))
+   '(lua-mode jetbrains-darcula-theme darcula-theme gruvbox-theme neotree org-bullets magit-todos magit vertico naysayer-theme move-text gruber-darker-theme ido-completing-read+ nhexl-mode hl-todo vundo counsel swiper ample-theme zenburn-theme))
  '(ring-bell-function 'ignore)
  '(save-place-mode t)
  '(shell-file-name "C:/Windows/System32/WindowsPowerShell/v1.0/powershell.exe")
@@ -143,10 +144,14 @@
 (global-set-key [M-down] 'move-text-down)
 
 ;; neotree
-(global-unset-key (kbd "C-b"))
-(global-set-key (kbd "C-b") 'neotree-toggle)
+(global-unset-key (kbd "C-S-b"))
+(global-set-key (kbd "C-S-b") 'neotree-toggle)
 
 ;;(setq neo-theme (if (display-graphic-p) 'icons 'arrow))
+
+;; switch buffers
+(global-unset-key (kbd "C-b"))
+(global-set-key (kbd "C-b") 'switch-to-buffer)
 
 ;; window switching stuff
 (global-unset-key (kbd "C-x o"))
@@ -212,43 +217,6 @@
 	nil))))
 
 (global-set-key (kbd "C-S-<tab>") 'bk/other-window-inverse)
-
-
-;; org mode stuff
-(defun bk/org-mode-setup ()
-  (org-indent-mode)
-  (auto-fill-mode 0)
-  (visual-line-mode 1))
-
-(use-package org
-  :hook (org-mode . bk/org-mode-setup)
-  :config
-  (setq org-hide-emphasis-markers t))
-
-(require 'org-faces)
-(dolist (face '((org-level-1 . 1.75)
-				(org-level-2 . 1.5)
-				(org-level-3 . 1.25)
-				(org-level-4 . 1.1)
-				(org-level-5 . 1.0)
-				(org-level-6 . 1.0)
-				(org-level-7 . 1.0)
-				(org-level-8 . 1.0)))
-  (set-face-attribute (car face) nil :font "Times New Roman" :weight 'bold :height (cdr face)))
-
-(require 'org-superstar)
-(add-hook 'org-mode-hook (lambda () (org-superstar-mode 1)))
-(setq org-superstar-headline-bullets-list '("◉" "○" "●" "○" "●" "○" "●"))
-(setq org-hide-leading-stars nil)
-(setq org-superstar-leading-bullet ?\s)
-(setq org-indent-mode-turns-on-hiding-stars nil)
-
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
 
 (defun indent-region-custom(numSpaces)
     (progn 
