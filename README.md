@@ -1,4 +1,1 @@
-# my-emacs
-
-My emacs config. 
-:)
+# random config files
