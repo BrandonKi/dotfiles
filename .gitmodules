@@ -1,3 +1,0 @@
-[submodule ".emacs.d/custom/dired-hacks"]
-	path = .emacs.d/custom/dired-hacks
-	url = https://github.com/Fuco1/dired-hacks
