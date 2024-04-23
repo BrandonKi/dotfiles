@@ -5,8 +5,6 @@
 -- https://neovim.io/doc/user/map.html
 
 -- TODO
--- change leader key to something else, while space is intuitive it isn't exactly easy to press
---
 -- this stuff I'll add as I need it, hopefully I get used to the new stuff though
 -- figure out the keybinds or change them to the old ones:
 --     make ctrl-backspace delete a whole word
@@ -33,7 +31,8 @@ vim.keymap.set("n", "<C-s>", builtin.current_buffer_fuzzy_find, {})
 vim.keymap.set("i", "<C-s>", builtin.current_buffer_fuzzy_find, {})
 
 -- remap the common file search to something quicker
-vim.keymap.set("n", "<C-f>", builtin.find_files, {})
+vim.keymap.set("n", "<C-f>", builtin.git_files, {})
+vim.keymap.set("n", "<C-S>f", builtin.find_files, {})
 
 -- remap save
 keymap("i", "<C-x><C-s>", "<ESC>:w<CR>", default_opts)
@@ -50,14 +49,17 @@ keymap("n", "N", "Nzz", default_opts)
 keymap("n", "k", "v:count == 0 ? 'gk' : 'k'", expr_opts)
 keymap("n", "j", "v:count == 0 ? 'gj' : 'j'", expr_opts)
 
--- Better indent
+-- Better indent, added by default now
 -- keymap("v", "<", "<gv", default_opts)
 -- keymap("v", ">", ">gv", default_opts)
-keymap("v", "<S-Tab>", "<gv", default_opts)
-keymap("v", "<Tab>", ">gv", default_opts)
+-- keymap("v", "<S-Tab>", "<gv", default_opts)
+-- keymap("v", "<Tab>", ">gv", default_opts)
 
 -- Paste over currently selected text without yanking it
 keymap("v", "p", '"_dP', default_opts)
+
+-- insert a p instead of pasting in select mode
+keymap("s", "p", "<Del><Esc>ip", default_opts)
 
 -- Switch buffer
 keymap("n", "<S-h>", ":bprevious<CR>", default_opts)
@@ -82,12 +84,17 @@ keymap("i", "<C-e>", "<ESC>A", default_opts)
 -- Highlight line
 keymap("n", "vv", "0v$", default_opts)
 
--- Move selected line / block of text in visual mode
+-- Move selected line / block of text
 keymap("x", "K", ":move '<-2<CR>gv-gv", default_opts)
 keymap("x", "J", ":move '>+1<CR>gv-gv", default_opts)
 
 keymap("v", "<M-Up>", ":move '<-2<CR>gv-gv", default_opts)
 keymap("v", "<M-Down>", ":move '>+1<CR>gv-gv", default_opts)
+
+keymap("n", "<M-Down>", "<cmd>m .+1<cr>==", default_opts)
+keymap("n", "<M-Up>", "<cmd>m .-2<cr>==", default_opts)
+keymap("i", "<M-Down>", "<esc><cmd>m .+1<cr>==gi", default_opts)
+keymap("i", "<M-Up>", "<esc><cmd>m .-2<cr>==gi", default_opts)
 
 -- window navigation
 keymap("n", "<C-w><Left>", "<C-w>h", default_opts)
