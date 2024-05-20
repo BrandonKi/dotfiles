@@ -31,8 +31,14 @@ vim.keymap.set("n", "<C-s>", builtin.current_buffer_fuzzy_find, {})
 vim.keymap.set("i", "<C-s>", builtin.current_buffer_fuzzy_find, {})
 
 -- remap the common file search to something quicker
-vim.keymap.set("n", "<C-f>", builtin.git_files, {})
-vim.keymap.set("n", "<C-S>f", builtin.find_files, {})
+-- vim.keymap.set("n", "<C-f>", builtin.git_files, {})
+-- vim.keymap.set("n", "<C-S>f", builtin.find_files, {})
+keymap("n", "<C-f>", "<Leader>ff", default_opts)
+-- keymap("i", "<C-f>", "<Leader>ff, default_opts")
+-- keymap("v", "<C-f>", "<Leader>ff, default_opts")
+
+-- previous buffer
+keymap("n", "<C-b>", "<C-^>", default_opts)
 
 -- remap save
 keymap("i", "<C-x><C-s>", "<ESC>:w<CR>", default_opts)
@@ -102,9 +108,8 @@ keymap("n", "<C-w><Right>", "<C-w>l", default_opts)
 keymap("n", "<C-w><Up>", "<C-w>k", default_opts)
 keymap("n", "<C-w><Down>", "<C-w>j", default_opts)
 
--- CHANGE THIS
 -- Resizing panes
-keymap("n", "<Leader><Left>", ":vertical resize +1<CR>", default_opts)
-keymap("n", "<Leader><Right>", ":vertical resize -1<CR>", default_opts)
-keymap("n", "<Leader><Up>", ":resize -1<CR>", default_opts)
-keymap("n", "<Leader><Down>", ":resize +1<CR>", default_opts)
+keymap("n", "<C-M-Left>", ":vertical resize +1<CR>", default_opts)
+keymap("n", "<C-M-Right>", ":vertical resize -1<CR>", default_opts)
+keymap("n", "<C-M-Up>", ":resize -1<CR>", default_opts)
+keymap("n", "<C-M-Down>", ":resize +1<CR>", default_opts)

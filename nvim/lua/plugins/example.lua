@@ -1,5 +1,8 @@
 -- TODO:
 -- * custom dashboard
+-- * fix find files, idk why it doesn't like ctrl-f
+-- * fix todo searching, works fine if done manually
+-- * maybe edit lualine a bit
 
 -- stylua: ignore
 if true then return {
@@ -36,29 +39,35 @@ if true then return {
         "folke/trouble.nvim",
         dependencies = { "nvim-tree/nvim-web-devicons" },
         opts = {
+
         },
     },
 
     -- lualine
-    {
-        'nvim-lualine/lualine.nvim',
-        dependencies = { 'nvim-tree/nvim-web-devicons' },
-        winbar = {
-            lualine_a = {},
-            lualine_b = {},
-            lualine_c = {'filename'},
-            lualine_x = {},
-            lualine_y = {},
-            lualine_z = {}
-        },
+    -- {
+    --     'nvim-lualine/lualine.nvim',
+    --     dependencies = { 'nvim-tree/nvim-web-devicons' },
+    --     winbar = {
+    --         lualine_a = {},
+    --         lualine_b = {},
+    --         lualine_c = {'filename'},
+    --         lualine_x = {},
+    --         lualine_y = {},
+    --         lualine_z = {}
+    --     },
+    --
+    --     inactive_winbar = {
+    --         lualine_a = {},
+    --         lualine_b = {},
+    --         lualine_c = {'filename'},
+    --         lualine_x = {},
+    --         lualine_y = {},
+    --         lualine_z = {}
+    --     },
+    -- },
 
-        inactive_winbar = {
-            lualine_a = {},
-            lualine_b = {},
-            lualine_c = {'filename'},
-            lualine_x = {},
-            lualine_y = {},
-            lualine_z = {}
-        },
+    -- disable bufferline
+    {
+        { "akinsho/bufferline.nvim", enabled = false },
     },
 } end
